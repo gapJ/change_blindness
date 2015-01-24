@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="../change_blindness.css">
+<title>Change Blindness</title>
+</head>
+<body>
+	<div id="image-changer">
+		<img id="image-frame" class="changing-image" src="" alt="starting"
+			style="visibility: visible" />
+	</div>
+</body>
+<script type="text/javascript">
+	var spacePressed = false;
+	window.addEventListener("keydown", dealWithKeyboard, true);
+	function dealWithKeyboard(e) {
+		//alert("key press detected");
+		if (e.keyCode == 0 || e.keyCode == 32) {
+			console.log('Space pressed');
+			spacePressed = true;
+		}
+	}
+
+	function startImageSwitcher(originalFile, changedFile, greyFile, maxTestTime) {
+		var s = document.getElementById('image-changer').style;
+		var i1 = document.getElementById('image-frame');
+		var counter = 1;
+		var startTime = new Date().getTime();
+
+		var refreshIntervalId = setInterval(function() {
+			if (counter % 4 == 1) {
+				i1.src = originalFile;
+			} else if (counter % 4 == 3) {
+				i1.src = changedFile;
+			} else {
+				i1.src = greyFile;
+			}
+			counter++;
+			var currentTime = new Date().getTime();
+			if (((currentTime - startTime) / 1000) / maxTestTime > 1) {
+				i1.src = greyFile;
+				alert("1 minute is complete");
+				clearInterval(refreshIntervalId);
+				return;
+			}
+			if (spacePressed) {
+				i1.src = greyFile;
+				alert("test is stopped due to key press");
+				clearInterval(refreshIntervalId);
+				return;
+			}
+		}, 500);
+	}
+
+	startImageSwitcher("IMG_2756.JPG", "IMG_2756_changed.JPG", "../grey.JPG", 60);
+</script>
+</html>
