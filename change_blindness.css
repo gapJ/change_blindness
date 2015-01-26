@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+#image-changer {
+	color: blue;
+	border: medium;
+	border-color: green;
+	text-align: center;
+	padding: 1em 0;
+	text-align: center;
+	visibility: visible;
+}
+
+.changing-image {
+	width: 800px;
+	height: 600px;
+}

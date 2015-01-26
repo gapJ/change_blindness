@@ -22,7 +22,8 @@
 		}
 	}
 
-	function startImageSwitcher(originalFile, changedFile, greyFile, maxTestTime) {
+	function startImageSwitcher(originalFile, changedFile, greyFile,
+			maxTestTime) {
 		var s = document.getElementById('image-changer').style;
 		var i1 = document.getElementById('image-frame');
 		var counter = 1;
@@ -38,7 +39,7 @@
 			}
 			counter++;
 			var currentTime = new Date().getTime();
-			if (((currentTime - startTime) / 1000) / maxTestTime > 1) {
+			if (((currentTime - startTime) / 1000) > maxTestTime) {
 				i1.src = greyFile;
 				alert("1 minute is complete");
 				clearInterval(refreshIntervalId);
@@ -50,9 +51,10 @@
 				clearInterval(refreshIntervalId);
 				return;
 			}
-		}, 500);
+		}, 200);
 	}
 
-	startImageSwitcher("IMG_2756.JPG", "IMG_2756_changed.JPG", "../grey.JPG", 60);
+	startImageSwitcher("IMG_2756.JPG", "IMG_2756_changed.JPG", "../grey.JPG",
+			60);
 </script>
 </html>
